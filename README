@@ -1,1 +1,4 @@
 This Repository Is For The Files Required to Run SeraphimCT Executor, Using Seraphim API. The API will automatically download the newest files once updated, from this repository.
+Seraphim.dll = Seraphim Inject File
+SeraphimAPI.dll  = API
+API Version = Update Count (Not Necessary)
