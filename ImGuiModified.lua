@@ -1496,23 +1496,34 @@ function ImGui:CreateWindow(WindowConfig)
 	local CloseButton: TextButton = TitleBar.Close
 CloseButton.Visible = WindowConfig.NoClose ~= true
 
+local CloseButton: TextButton = TitleBar.Close
+CloseButton.Visible = not WindowConfig.NoClose -- Ensure proper logic
+
 function WindowConfig:Close()
-    local Callback = WindowConfig.CloseCallback
-    WindowConfig:SetVisible(false)
-    if Callback then
-        Callback(WindowConfig)
+    -- Run the close callback if defined
+    if self.CloseCallback then
+        self.CloseCallback(self)
     end
 
-    -- Remove the ScreenGui from the game
+    -- Set the window invisible
+    self:SetVisible(false)
+
+    -- Remove the ScreenGui from CoreGui
     local ScreenGui = game:GetService("CoreGui"):FindFirstChild("ScreenGui")
     if ScreenGui then
-        ScreenGui:Destroy()  -- This removes the ScreenGui from the game
+        ScreenGui:Destroy() -- Destroy the ScreenGui
+        print("ScreenGui destroyed.")
+    else
+        warn("ScreenGui not found in CoreGui.")
     end
 
-    return WindowConfig
+    return self
 end
 
-CloseButton.Activated:Connect(WindowConfig.Close)
+-- Connect the Close button to the Close function
+CloseButton.Activated:Connect(function()
+    WindowConfig:Close()
+end)
 
 
 	function WindowConfig:GetHeaderSizeY(): number
