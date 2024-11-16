@@ -555,7 +555,7 @@ function ImGui:ContainerClass(Frame: Frame, Class, Window)
 	function ContainerClass:InputTextMultiline(Config)
 		Config = Config or {}
 		Config.Label = ""
-		Config.Size = UDim2.new(0, 275, 0, 175)
+		Config.Size = UDim2.new(1, 0, 0, 200) -- This will take up 100% of the parent width, and the height will be 175 pixels
 		Config.MultiLine = true
 		return ContainerClass:InputText(Config)
 	end
