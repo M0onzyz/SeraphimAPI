@@ -555,7 +555,7 @@ function ImGui:ContainerClass(Frame: Frame, Class, Window)
 	function ContainerClass:InputTextMultiline(Config)
 		Config = Config or {}
 		Config.Label = ""
-		Config.Size = UDim2.new(0, 2, 0, 20)
+		Config.Size = UDim2.new(0, 150, 0, 225)
 		Config.MultiLine = true
 		return ContainerClass:InputText(Config)
 	end
