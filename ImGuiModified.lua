@@ -1500,24 +1500,14 @@ local CloseButton: TextButton = TitleBar.Close
 CloseButton.Visible = not WindowConfig.NoClose -- Ensure proper logic
 
 function WindowConfig:Close()
-    -- Run the close callback if defined
-    if self.CloseCallback then
-        self.CloseCallback(self)
-    end
-
-    -- Set the window invisible
-    self:SetVisible(false)
-
-    -- Remove the ScreenGui from CoreGui
-    local ScreenGui = game:GetService("CoreGui"):FindFirstChild("ScreenGui")
-    if ScreenGui then
-        ScreenGui:Destroy() -- Destroy the ScreenGui
-        print("ScreenGui destroyed.")
+       local screenGui = CoreGui:FindFirstChild("ScreenGui") -- Adjust this to match your GUI's name
+    if screenGui then
+        windowVisible = not windowVisible
+        screenGui.Enabled = windowVisible
+        print(windowVisible and "Window is now visible." or "Window is now hidden.")
     else
         warn("ScreenGui not found in CoreGui.")
     end
-
-    return self
 end
 
 -- Connect the Close button to the Close function
