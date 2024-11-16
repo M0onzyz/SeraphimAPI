@@ -1494,7 +1494,7 @@ function ImGui:CreateWindow(WindowConfig)
 
 	--// Close Window 
 	local CloseButton: TextButton = TitleBar.Close
-CloseButton.Visible = WindowConfig.NoClose ~= true
+CloseButton.Visible = WindowConfig.NoClose == true
 
 local CloseButton: TextButton = TitleBar.Close
 CloseButton.Visible = not WindowConfig.NoClose -- Ensure proper logic
@@ -1512,7 +1512,7 @@ end
 
 -- Connect the Close button to the Close function
 CloseButton.Activated:Connect(function()
-    WindowConfig:Close()
+	--WindowConfig:Close()
 end)
 
 
